@@ -10,18 +10,14 @@ import (
 
 // flags
 var (
-	user string
+	user       string
+	repository string
 )
 
 func main() {
 	flag.Parse()
 
-	if flag.NFlag() == 0 {
-		fmt.Printf("Usage: %s [options]\n", os.Args[0])
-		fmt.Println("Options:")
-		flag.PrintDefaults()
-		os.Exit(1)
-	}
+	hasFlags()
 
 	var users = strings.Split(user, ",")
 	fmt.Printf("Searching user(s): %s\n", users)
@@ -29,4 +25,14 @@ func main() {
 
 func init() {
 	flag.StringVarP(&user, "user", "u", "", "Search Users")
+	flag.StringVarP(&repository, "repository", "r", "", "GitHub repository")
+}
+
+func hasFlags() {
+	if flag.NFlag() == 0 {
+		fmt.Printf("Usage: %s [options]\n\n", os.Args[0])
+		fmt.Println("Options:")
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
 }
