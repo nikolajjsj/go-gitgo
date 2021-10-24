@@ -26,10 +26,14 @@ func main() {
 	fmt.Printf("Searching user(s): %s\n", users)
 	for _, u := range users {
 		result := GetUsers(u)
+		repoResult := GetRepositories(u)
 		colour.Cyan(`Username:	%s`, result.Login)
 		colour.Blue(`Name:		%s`, result.Name)
 		colour.Green(`Email:		%s`, result.Email)
 		colour.HiMagenta(`Bio:		%s`, result.Bio)
+		for _, r := range repoResult {
+			colour.Red(`Repository: %s`, r.Name)
+		}
 		fmt.Println("")
 	}
 }
